@@ -1,0 +1,47 @@
+.form-page {
+  display: grid;
+  gap: 14px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.85rem;
+  color: #1e2d4f;
+}
+
+.event-form {
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.form-group {
+  display: grid;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-note {
+  margin: 0;
+  color: #99650a;
+  font-size: 0.9rem;
+}
+
+.form-link {
+  color: #3f63f4;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .event-form {
+    padding: 18px;
+  }
+}
