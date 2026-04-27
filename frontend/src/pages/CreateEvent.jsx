@@ -31,11 +31,14 @@ const CreateEvent = () => {
   };
 
   return (
-    <section className="form-page">
-      <h1 className="page-title">Create Event</h1>
-      {error && <p className="form-error">{error}</p>}
-      <EventForm categories={categories} onSubmit={handleSubmit} submitText="Create Event" />
-    </section>
+    <div className="form-page page-section">
+      <div className="form-page-header">
+        <h1>Create New Event</h1>
+        <p>Fill in the details below to publish your event to the platform.</p>
+      </div>
+      {error && <div className="alert alert-error" style={{ marginBottom: 20 }}>{error}</div>}
+      <EventForm categories={categories} onSubmit={handleSubmit} submitText="Publish Event" />
+    </div>
   );
 };
 

@@ -10,8 +10,27 @@ const createRegistration = asyncHandler(async (req, res) => {
   const event = await Event.findById(eventId);
   if (!event) throw new ApiError(404, "Event not found");
 
-  const existingRegistration = await Registration.findOne({ user: userId, event: eventId });
+  const existingRegistration = await Registration.findOne({
+    user: userId,
+    event: eventId,
+    status: { $ne: "cancelled" },
+  });
   if (existingRegistration) throw new ApiError(400, "You are already registered for this event");
+  const existingRegistration2 = await Registration.findOne({
+    user: userId,
+    event: eventId,
+    status: "cancelled"
+  });
+  if (existingRegistration2) {
+    existingRegistration2.status = "confirmed";
+    await existingRegistration2.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Re-registered for event successfully",
+      data: existingRegistration2,
+    });
+  }
 
   const confirmedCount = await Registration.countDocuments({
     event: eventId,

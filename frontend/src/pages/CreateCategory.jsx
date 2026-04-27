@@ -36,8 +36,8 @@ const CreateCategory = () => {
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
       {success && <p className="mt-3 text-sm text-green-600">{success}</p>}
 
-      <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-        <div>
+      <form onSubmit={handleSubmit} className="mt-4">
+        <div className="mb-8">
           <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
             Category name
           </label>
@@ -52,7 +52,7 @@ const CreateCategory = () => {
         </div>
         <button
           type="submit"
-          className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+          className="btn btn-primary"
         >
           Create Category
         </button>

@@ -53,109 +53,117 @@ const EventForm = ({ categories, initialValues, onSubmit, submitText = "Save Eve
   };
 
   return (
-    <form onSubmit={handleSubmit} className="ui-card event-form">
-      {error && <p className="form-error">{error}</p>}
-      <div className="form-group">
-        <label htmlFor="title" className="form-label">
-          Title
-        </label>
-        <input
-          id="title"
-          name="title"
-          placeholder="Event title"
-          value={form.title}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="description" className="form-label">
-          Description
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Event description"
-          value={form.description}
-          onChange={handleChange}
-          className="form-control form-textarea"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="date" className="form-label">
-          Date and time
-        </label>
-        <input
-          id="date"
-          name="date"
-          type="datetime-local"
-          value={form.date}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="location" className="form-label">
-          Location
-        </label>
-        <input
-          id="location"
-          name="location"
-          placeholder="Location"
-          value={form.location}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="capacity" className="form-label">
-          Capacity
-        </label>
-        <input
-          id="capacity"
-          name="capacity"
-          type="number"
-          min="1"
-          value={form.capacity}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="category" className="form-label">
-          Category
-        </label>
-        <select
-          id="category"
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-          className="form-control"
-        >
-          <option value="">Select category</option>
-          {categories.map((category) => (
-            <option key={category._id} value={category._id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      {!categories.length && (
-        <p className="form-note">
-          No categories found. Ask an admin to create categories first{" "}
-          <Link to="/categories/create" className="form-link">
-            from here
-          </Link>
-          .
-        </p>
-      )}
+    <form onSubmit={handleSubmit} className="event-form">
+      <div className="event-form-body">
+        {error && <div className="alert alert-error">{error}</div>}
 
-      <button
-        type="submit"
-        className="btn btn-primary"
-      >
-        {submitText}
-      </button>
+        {/* Title */}
+        <div className="form-field">
+          <label htmlFor="title" className="form-label">Event Title</label>
+          <input
+            id="title"
+            name="title"
+            placeholder="e.g. Annual Tech Summit 2025"
+            value={form.title}
+            onChange={handleChange}
+            className="form-input"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="form-field">
+          <label htmlFor="description" className="form-label">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Describe what attendees can expect..."
+            value={form.description}
+            onChange={handleChange}
+            className="form-textarea"
+          />
+        </div>
+
+        {}
+        <div className="form-row">
+          <div className="form-field">
+            <label htmlFor="date" className="form-label">Date & Time</label>
+            <input
+              id="date"
+              name="date"
+              type="datetime-local"
+              value={form.date}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="location" className="form-label">Location</label>
+            <input
+              id="location"
+              name="location"
+              placeholder="e.g. Cairo International Center"
+              value={form.location}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
+        </div>
+
+        {/* Capacity & Category row */}
+        <div className="form-row">
+          <div className="form-field">
+            <label htmlFor="capacity" className="form-label">Capacity</label>
+            <input
+              id="capacity"
+              name="capacity"
+              type="number"
+              min="1"
+              value={form.capacity}
+              onChange={handleChange}
+              className="form-input"
+            />
+            <p className="form-hint">Maximum number of attendees</p>
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="category" className="form-label">Category</label>
+            <select
+              id="category"
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {!categories.length && (
+          <div className="form-no-categories">
+            No categories found. Ask an admin to{" "}
+            <Link to="/categories/create">create categories first</Link>.
+          </div>
+        )}
+      </div>
+
+      <div className="event-form-footer">
+        <button type="submit" className="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          {submitText}
+        </button>
+        <Link to="/events" className="btn btn-secondary">
+          Cancel
+        </Link>
+      </div>
     </form>
   );
 };

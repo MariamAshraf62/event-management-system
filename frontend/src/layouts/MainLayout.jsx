@@ -1,12 +1,14 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import "../styles/layout.css";
+import "../styles/misc.css";
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="app-shell">
+    <div className="layout">
       <Navbar />
-      <main className="app-main">{children}</main>
+      <main className="layout-main">
+        {children}
+      </main>
       <Footer />
     </div>
   );

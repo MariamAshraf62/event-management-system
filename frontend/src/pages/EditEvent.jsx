@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import EventForm from "../components/EventForm";
 import api from "../services/api";
 import Loader from "../components/Loader";
-import "../styles/forms.css";
 
 const EditEvent = () => {
   const { id } = useParams();
@@ -43,9 +42,9 @@ const EditEvent = () => {
   if (loading) return <Loader />;
 
   return (
-    <section className="form-page">
-      <h1 className="page-title">Edit Event</h1>
-      {error && <p className="form-error">{error}</p>}
+    <section>
+      <h1 className="mb-4 text-2xl font-bold">Edit Event</h1>
+      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
       <EventForm
         categories={categories}
         initialValues={event}

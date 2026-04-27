@@ -6,6 +6,7 @@ import EventCard from "../components/EventCard";
 import Pagination from "../components/Pagination";
 import useAuth from "../hooks/useAuth";
 import "../styles/events.css";
+import "../styles/forms.css";
 
 const Events = () => {
   const { user } = useAuth();
@@ -52,50 +53,71 @@ const Events = () => {
   if (loading) return <Loader />;
 
   return (
-    <section className="events-page">
-      <div className="events-header">
-        <h1 className="events-title">All Events</h1>
-        <Link
-          to="/events/create"
-          className="btn btn-primary"
-        >
+    <section className="events-page page-section">
+      {/* Header */}
+      <div className="events-page-header">
+        <h1>All Events</h1>
+        <Link to="/events/create" className="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
           Create Event
         </Link>
       </div>
 
-      <div className="ui-card events-filter-card">
-        <label className="form-label">Filter by category</label>
-        <select
-          value={category}
-          onChange={(event) => {
-            setCategory(event.target.value);
-            setPage(1);
-          }}
-          className="form-control events-filter"
-        >
-          <option value="">All Categories</option>
-          {categories.map((item) => (
-            <option key={item._id} value={item._id}>
-              {item.name}
-            </option>
+      {/* Filter bar */}
+      <div className="events-filter-bar">
+        <div className="form-field">
+          <label className="form-label">Filter by category</label>
+          <select
+            value={category}
+            onChange={(event) => {
+              setCategory(event.target.value);
+              setPage(1);
+            }}
+            className="form-select"
+          >
+            <option value="">All Categories</option>
+            {categories.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        {category && (
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => { setCategory(""); setPage(1); }}
+            style={{ alignSelf: "flex-end", marginBottom: 1 }}
+          >
+            Clear filter
+          </button>
+        )}
+      </div>
+
+      {error && <div className="alert alert-error">{error}</div>}
+
+      {/* Grid */}
+      {events.length > 0 ? (
+        <div className="events-grid">
+          {events.map((event) => (
+            <EventCard
+              key={event._id}
+              event={event}
+              onDelete={handleDelete}
+              canManage={user && event.createdBy?._id === user.id}
+            />
           ))}
-        </select>
-      </div>
-
-      {error && <p className="form-error">{error}</p>}
-
-      <div className="events-grid">
-        {events.map((event) => (
-          <EventCard
-            key={event._id}
-            event={event}
-            onDelete={handleDelete}
-            canManage={user && event.createdBy?._id === user.id}
-          />
-        ))}
-      </div>
-
-      {!events.length && <p className="empty-state">No events found.</p>}
+        </div>
+      ) : (
+        <div className="events-empty">
+          <div className="events-empty-icon">📅</div>
+          <p>No events found. Try changing the filter or create a new event.</p>
+        </div>
+      )}
 
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </section>

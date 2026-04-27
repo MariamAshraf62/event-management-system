@@ -1,0 +1,133 @@
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .layout-main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 36px 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .layout-main {
+      padding: 24px 16px;
+    }
+  }
+  
+  /* ── Loader ─────────────────────────────────────────────────── */
+  .loader-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    gap: 16px;
+  }
+  
+  .loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--gray-200);
+    border-top-color: var(--brand-500);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .loader-text {
+    font-size: 14px;
+    color: var(--gray-400);
+  }
+  
+  /* ── Pagination ─────────────────────────────────────────────── */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  
+  .pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--gray-200);
+    background: var(--gray-0);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-600);
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-bounce);
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    background: var(--brand-50);
+    border-color: var(--brand-200);
+    color: var(--brand-600);
+    transform: translateY(-1px);
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    font-size: 13px;
+    color: var(--gray-500);
+    padding: 0 8px;
+    font-weight: 500;
+  }
+  
+  /* ── Not Found ─────────────────────────────────────────────── */
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    animation: fadeSlideUp 0.4s ease both;
+    gap: 20px;
+  }
+  
+  .not-found-code {
+    font-family: var(--font-display);
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+  
+  .not-found-desc {
+    font-size: 15px;
+    color: var(--gray-500);
+    max-width: 300px;
+  }
